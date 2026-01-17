@@ -70,5 +70,3 @@ pipeline{
         }
     }
 }
-
-AKIAXEH6EYUHVIG2XNDK
