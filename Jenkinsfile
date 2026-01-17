@@ -1,9 +1,9 @@
 pipeline{
     agent {label 'terraform-node'}
-    parameter{
+    parameters{
         choice(name:'action', choices:['apply','destroy'],description:'Select Terraform action')
     }
-    envirenment{
+    environment{
         AWS_ACCESS_KEY_ID= credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY= credentials('AWS_SECRET_ACCESS_KEY')
     }
