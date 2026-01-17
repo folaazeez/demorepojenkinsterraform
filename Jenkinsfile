@@ -23,7 +23,7 @@ pipeline{
                 sh 'terraform init'
             }
         }
-        stage('Terraform Init'){
+        stage('Terraform action'){
             steps{
                 sh '''
                 echo "Terraform action is ---> ${action}"
