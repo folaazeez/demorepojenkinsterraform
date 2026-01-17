@@ -17,6 +17,7 @@ pipeline{
             steps{
                 sh '''
                 mkdir -p ~/.aws
+                mkdir -p ~/.aws
                 echo "[default]" > ~/.aws/credentials 
                 echo "AWS_ACCESS_KEY_ID = ${AWS_ACCESS_KEY_ID}" >> ~/.aws/credentials 
                 echo "AWS_SECRET_ACCESS_KEY = ${AWS_SECRET_ACCESS_KEY}" >> ~/.aws/credentials 
@@ -69,3 +70,5 @@ pipeline{
         }
     }
 }
+
+AKIAXEH6EYUHVIG2XNDK
