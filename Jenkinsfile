@@ -1,5 +1,5 @@
 pipeline{
-    agent (label 'terraform-node')
+    agent {label 'terraform-node'}
     parameter{
         choice(name:'action', choices:['apply','destroy'],description:'Select Terraform action')
     }
