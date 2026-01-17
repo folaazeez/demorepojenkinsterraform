@@ -3,43 +3,30 @@ pipeline{
     parameters{
         choice(name:'action', choices:['apply','destroy'],description:'Select Terraform action')
     }
-    environment{
-        AWS_ACCESS_KEY_ID= credentials('AWS_ACCESS_KEY_ID')
-        AWS_SECRET_ACCESS_KEY= credentials('AWS_SECRET_ACCESS_KEY')
-    }
     stages{
         stage('Checkout Code'){
             steps{
                 checkout scm
             }
-        }
-        stage('Credentials'){
-            steps{
-                sh '''
-                mkdir -p ~/.aws
-                mkdir -p ~/.aws
-                echo "[default]" > ~/.aws/credentials 
-                echo "AWS_ACCESS_KEY_ID = ${AWS_ACCESS_KEY_ID}" >> ~/.aws/credentials 
-                echo "AWS_SECRET_ACCESS_KEY = ${AWS_SECRET_ACCESS_KEY}" >> ~/.aws/credentials 
-                '''
-            }
-        }        
+        }     
         stage('Terraform Format Check'){
             steps{
                 sh 'terraform fmt'
             }
         }
         stage('Terraform Init'){
-            steps{
+            steps{                
                 sh 'terraform init'
             }
         }
         stage('Terraform action'){
             steps{
-                sh '''
-                echo "Terraform action is ---> ${action}"
-                terraform ${action} --auto-approve
-                '''
+                withCredentials([[$class:'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]){
+                    sh '''
+                    echo "Terraform action is ---> ${action}"
+                    terraform ${action} --auto-approve
+                    '''                    
+                }
             }
         }
 
