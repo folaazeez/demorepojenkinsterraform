@@ -35,9 +35,6 @@ pipeline{
     }
 
     post{
-        always{
-
-        }
         success{
             emailext (
                 subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
