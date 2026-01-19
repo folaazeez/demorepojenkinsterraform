@@ -67,5 +67,6 @@ pipeline{
                 from: 'infofoladevops@gmail.com',
             )
         }
+        cleanup { cleanWs() }
     }
 }
